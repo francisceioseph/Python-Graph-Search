@@ -32,16 +32,24 @@ class Graph:
             print "Invalid start/end"
 
     def add_arc_with_labels(self, label_start, label_end):
-        node_start = [node for node in self.nodes if node.label == label_start].pop()
-        node_end = [node for node in self.nodes if node.label == label_end].pop()
-
-        start_index = self.nodes.index(node_start)
-        end_index = self.nodes.index(node_end)
+        start_index = self.index_for_label(label_start)
+        end_index = self.index_for_label(label_end)
 
         self.add_arc(start_index, end_index)
 
     def show_node_at_index(self, node_number):
         print(self.adjacency_matrix[node_number].label)
+
+    def index_for_label(self, label):
+        node = [node for node in self.nodes if node.label == label].pop()
+        return self.nodes.index(node)
+
+    def depth_search(self, start_label, end_label):
+        start_index = self.index_for_label(start_label)
+        end_index = self.index_for_label(end_label)
+        pile = []
+
+        self.nodes
 
     def show_nodes(self):
         print "========================"
