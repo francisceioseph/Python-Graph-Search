@@ -44,12 +44,48 @@ class Graph:
         node = [node for node in self.nodes if node.label == label].pop()
         return self.nodes.index(node)
 
+    def get_near_unmarked(self, index):
+        near_index = -1
+        for i in range(self.number_of_nodes()):
+            if self.adjacency_matrix[index][i] == 1 and self.nodes[i].checked == False:
+                near_index = i
+        return near_index
+
     def depth_search(self, start_label, end_label):
         start_index = self.index_for_label(start_label)
         end_index = self.index_for_label(end_label)
         pile = []
 
-        self.nodes
+        self.nodes[start_index].check()
+        pile.append(start_index)
+
+        while len(pile) != 0:
+            last_index = len(pile) - 1
+            top_node = pile[last_index]
+
+            if top_node == end_index:
+                print 'Path Found'
+
+                for pile_index, node_index in enumerate(pile):
+                    if pile_index == last_index:
+                        print "{0}".format(self.nodes[node_index].label)
+                    else:
+                        print "{0} ->".format(self.nodes[node_index].label),
+                break
+
+            near_index = self.get_near_unmarked(top_node)
+
+            if near_index == -1:
+                pile.pop()
+            else:
+                self.nodes[near_index].check()
+                pile.append(near_index)
+
+        else:
+            print 'Path not found'
+
+        for node in self.nodes:
+            node.uncheck()
 
     def show_nodes(self):
         print "========================"

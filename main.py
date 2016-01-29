@@ -6,26 +6,25 @@ def menu():
     print "=         Main         ="
     print "========================"
 
-    print "1 - Insert a node with label"
-    print "2 - Insert an arc"
-    print "3 - Show nodes"
-    print "4 - Show adjacency matrix"
+    print "1 - Show nodes"
+    print "2 - Show adjacency matrix"
+    print "3 - Search... "
 
 
 def setup_graph():
     graph = Graph(5)
 
-    graph.add_node("A")
-    graph.add_node("B")
-    graph.add_node("C")
-    graph.add_node("D")
-    graph.add_node("E")
+    graph.add_node("a")
+    graph.add_node("b")
+    graph.add_node("c")
+    graph.add_node("d")
+    graph.add_node("e")
 
-    graph.add_arc_with_labels("A", "B")
-    graph.add_arc_with_labels("A", "C")
-    graph.add_arc_with_labels("C", "D")
-    graph.add_arc_with_labels("C", "E")
-    graph.add_arc_with_labels("B", "E")
+    graph.add_arc_with_labels("a", "b")
+    graph.add_arc_with_labels("a", "c")
+    graph.add_arc_with_labels("c", "d")
+    graph.add_arc_with_labels("c", "e")
+    graph.add_arc_with_labels("b", "e")
 
     return graph
 
@@ -35,24 +34,19 @@ def main():
     option = 0
 
     while option != -1:
-        menu(graph)
+        menu()
         option = input("Type your option: ")
 
         if option == 1:
-            label = raw_input("Node label:")
-            graph.add_node(label)
+            graph.show_nodes()
 
         elif option == 2:
+            graph.show_adjacency_matrix()
+
+        elif option == 3:
             label_from = raw_input("Label of from node:")
             label_to = raw_input("Label of to node: ")
 
-            graph.add_arc_with_labels(label_from, label_to)
-
-        elif option == 3:
-            graph.show_nodes()
-
-        elif option == 4:
-            graph.show_adjacency_matrix()
-
+            graph.depth_search(label_from, label_to)
 
 main()
