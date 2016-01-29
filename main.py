@@ -2,7 +2,6 @@ from graph import Graph
 
 
 def menu():
-
     print "========================"
     print "=         Main         ="
     print "========================"
@@ -13,7 +12,7 @@ def menu():
     print "4 - Show adjacency matrix"
 
 
-def main():
+def setup_graph():
     graph = Graph(5)
 
     graph.add_node("A")
@@ -28,6 +27,11 @@ def main():
     graph.add_arc_with_labels("C", "E")
     graph.add_arc_with_labels("B", "E")
 
+    return graph
+
+
+def main():
+    graph = setup_graph()
     option = 0
 
     while option != -1:
