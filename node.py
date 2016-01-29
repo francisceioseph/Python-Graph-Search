@@ -1,6 +1,7 @@
 class Node:
     def __init__(self, label):
         self.label = label
+        self.checked = False
 
     def __str__(self):
         return "Node: {0}".format(self.label)
@@ -17,3 +18,8 @@ class Node:
         else:
             return NotImplemented
 
+    def check(self):
+        self.checked = True
+
+    def uncheck(self):
+        self.checked = False
